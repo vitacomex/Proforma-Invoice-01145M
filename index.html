@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagamento via Pix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+    h1 {
+      color: #333;
+    }
+    .pix-box {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 95%;
+      height: 140px;
+      font-size: 14px;
+      padding: 10px;
+      resize: none;
+    }
+    button {
+      background: #007bff;   /* azul */
+      color: #fff;           /* texto branco */
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #0056b3;   /* azul mais escuro no hover */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pagamento via Pix</h1>
+  <h1>Proforma Invoice VITA COMEX #01145M</h1>
+
+  <div class="pix-box">
+    <p>Copie o código abaixo e cole no seu app bancário para pagar:</p>
+    <textarea id="pixCode" readonly>
+00020101021226830014br.gov.bcb.pix2561pix.bancobv.com.br/qr/v2/73433a80-c3e9-11f0-bc73-2225832991d75204000053039865802BR5925WISE BRASIL CORRETORA DE 6009SAO PAULO62070503***63045D06
+
+    </textarea>
+    <button onclick="copiarPix()">Copiar código Pix</button>
+    <p id="mensagem" style="color:green; font-weight:bold; display:none;">
+      Código copiado!
+    </p>
+  </div>
+
+  <script>
+    function copiarPix() {
+      const texto = document.getElementById("pixCode");
+      texto.select();
+      texto.setSelectionRange(0, 99999); // Para dispositivos móveis
+      navigator.clipboard.writeText(texto.value).then(() => {
+        document.getElementById("mensagem").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("mensagem").style.display = "none";
+        }, 2000);
+      }).catch(() => {
+        alert("Não foi possível copiar automaticamente. Copie manualmente.");
+      });
+    }
+  </script>
+
+</body>
+</html>
